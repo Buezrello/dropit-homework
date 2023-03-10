@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: dropit
+  data:
+    mongodb:
+      database: ${MONGO_DB:dropit}
+      host: ${MONGO_HOST:0.0.0.0}
+      port: ${MONGO_PORT:27017}
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+  error:
+    include-message: always
+    include-binding-errors: always
+
+springdoc:
+  api-docs:
+    enabled: true
+    groups:
+      enabled: true
+    path: /dropit/api-docs
+  cache:
+    disabled: true
+  swagger-ui:
+    display-request-duration: true
+    enabled: true
+    path: /dropit/swagger-ui
+
+geoapify:
+  host: ${GEOAPIFY_URL:https://api.geoapify.com}
+  token: ${GEOAPIFY_TOKEN}
