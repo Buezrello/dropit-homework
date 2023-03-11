@@ -1,8 +1,12 @@
 package com.example.dropit.service;
 
+import com.example.dropit.dto.FormattedAddressDto;
 import com.example.dropit.dto.SingleLineAddressDto;
-import com.example.dropit.model.geoapify.Properties;
+import com.example.dropit.dto.TimeSlot;
+
+import java.util.List;
 
 public interface DropitService {
-    Properties resolveAddress(SingleLineAddressDto singleLineAddressDto);
+    FormattedAddressDto resolveAddress(SingleLineAddressDto singleLineAddressDto);
+    List<TimeSlot> availableTimeSlots(String dateTime, SingleLineAddressDto singleLineAddressDto);
 }

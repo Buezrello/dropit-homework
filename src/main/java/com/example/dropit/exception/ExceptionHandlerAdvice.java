@@ -19,4 +19,10 @@ public class ExceptionHandlerAdvice {
         log.error(ex.getMessage());
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
+
+    @ExceptionHandler(MongoDbNotFoundException.class)
+    public void handleMongoDbNotFoundException(HttpServletResponse response, ResolveAddressException ex) throws IOException {
+        log.error(ex.getMessage());
+        response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+    }
 }

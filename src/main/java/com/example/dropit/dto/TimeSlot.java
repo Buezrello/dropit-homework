@@ -2,10 +2,13 @@ package com.example.dropit.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Generated;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,10 +21,10 @@ public class TimeSlot {
     private String id;
     @JsonProperty(value = "start_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date startTime;
+    private LocalDateTime startTime;
     @JsonProperty(value = "end_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endTime;
+    private LocalDateTime endTime;
     @JsonProperty(value = "supported_postcodes")
     private List<String> supportedPostcodes;
 

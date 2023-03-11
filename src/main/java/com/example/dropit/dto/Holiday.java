@@ -7,7 +7,7 @@ import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Generated
@@ -18,6 +18,6 @@ public class Holiday {
     private String id;
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
     private String country;
 }

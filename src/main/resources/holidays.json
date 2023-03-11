@@ -1,18 +1,17 @@
 [
-    {
-      "name": "New Year's Day",
-      "date": "2023-01-17",
-      "country": "US"
-    },
-    {
-      "name": "Mother's Day",
-      "date": "2023-09-18",
-      "country": "US"
-    },
-    {
-      "name": "Independence Day",
-      "date": "2023-10-17",
-      "country": "US"
-    }
-  ]
-
+  {
+    "name": "New Year's Day",
+    "date": "2023-01-17",
+    "country": "US"
+  },
+  {
+    "name": "Mother's Day",
+    "date": "2023-09-18",
+    "country": "US"
+  },
+  {
+    "name": "Independence Day",
+    "date": "2023-10-17",
+    "country": "US"
+  }
+]

@@ -5,6 +5,7 @@ import com.example.dropit.dto.Holiday;
 import com.example.dropit.dto.TimeSlot;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -31,10 +32,16 @@ public class EventListenerBean {
         File holidays = ResourceUtils.getFile("classpath:holidays.json");
         File timeslots = ResourceUtils.getFile("classpath:timeslots.json");
 
-        List<Holiday> holidayList = new ObjectMapper().readValue(holidays, new TypeReference<>() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+//        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+//        objectMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
+
+        List<Holiday> holidayList = objectMapper.readValue(holidays, new TypeReference<>() {
         });
 
-        List<TimeSlot> timeslotList = new ObjectMapper().readValue(timeslots, new TypeReference<>() {
+        List<TimeSlot> timeslotList = objectMapper.readValue(timeslots, new TypeReference<>() {
         });
 
         mongoGeneric.initHolidays(holidayList);
