@@ -17,6 +17,8 @@ public interface MongoGeneric {
     void updateDelivery(DeliveryDto deliveryDto);
     List<TimeSlot> findTimeSlotByTime(LocalDateTime dateTime);
     List<TimeSlot> findTimeSlotByTimeAndPostCode(LocalDateTime dateTime, String postcode);
+    List<TimeSlot> findTimeSlotsByDate(LocalDateTime startDate, LocalDateTime endDate);
     List<DeliveryDto> findDeliveryByTimeSlotAndStatus(String timeSlotId, DeliveryStatusEnum deliveryStatusEnum);
     List<DeliveryDto> findDeliveryByStatus(DeliveryStatusEnum deliveryStatusEnum);
+    List<DeliveryDto> findDeliveryByTimeSlot(String timeSlotId);
 }

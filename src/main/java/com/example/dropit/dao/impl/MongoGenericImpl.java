@@ -86,6 +86,16 @@ public class MongoGenericImpl implements MongoGeneric {
     }
 
     @Override
+    public List<TimeSlot> findTimeSlotsByDate(LocalDateTime startDate, LocalDateTime endDate) {
+        log.info("Find time slots between {} and {}", startDate, endDate);
+        List<TimeSlot> result = timeSlotRepository.findByStartTimeAfterAndEndTimeBefore(startDate, endDate);
+        if (result.isEmpty()) {
+            log.info("No time slots between {} and {}", startDate, endDate);
+        }
+        return result;
+    }
+
+    @Override
     public List<DeliveryDto> findDeliveryByTimeSlotAndStatus(String timeSlotId, DeliveryStatusEnum deliveryStatusEnum) {
         log.info("Find delivery by time slot ID {} and status {}", timeSlotId, deliveryStatusEnum);
         List<DeliveryDto> result = deliveryRepository.findByTimeSlotIdAndDeliveryStatusEnum(timeSlotId, deliveryStatusEnum);
@@ -103,6 +113,16 @@ public class MongoGenericImpl implements MongoGeneric {
             log.error("Delivery by status {} not found", deliveryStatusEnum);
         }
         return  result;
+    }
+
+    @Override
+    public List<DeliveryDto> findDeliveryByTimeSlot(String timeSlotId) {
+        log.info("Find delivery by time slot ID {}", timeSlotId);
+        List<DeliveryDto> result = deliveryRepository.findByTimeSlotId(timeSlotId);
+        if (result.isEmpty()) {
+            log.error("Delivery by time slot ID {} not found", timeSlotId);
+        }
+        return result;
     }
 
 

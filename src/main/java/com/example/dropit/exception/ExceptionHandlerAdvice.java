@@ -21,7 +21,13 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(MongoDbNotFoundException.class)
-    public void handleMongoDbNotFoundException(HttpServletResponse response, ResolveAddressException ex) throws IOException {
+    public void handleMongoDbNotFoundException(HttpServletResponse response, MongoDbNotFoundException ex) throws IOException {
+        log.error(ex.getMessage());
+        response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(BusinessCapacityException.class)
+    public void handleBusinessCapacityException(HttpServletResponse response, BusinessCapacityException ex) throws IOException {
         log.error(ex.getMessage());
         response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }

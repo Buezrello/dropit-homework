@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,8 +22,12 @@ import java.util.UUID;
 public class MongoDbHelper {
     private final MongoGeneric mongoGeneric;
 
-    public void saveNewDelivery(String timeSlotId) {
+    public void createNewDelivery(String timeSlotId) {
         String userId = UUID.randomUUID().toString();
+        createNewDelivery(userId, timeSlotId);
+    }
+
+    public void createNewDelivery(String userId, String timeSlotId) {
         mongoGeneric.createNewDelivery(userId, timeSlotId, DeliveryStatusEnum.IN_PROGRESS);
     }
 
@@ -41,7 +46,11 @@ public class MongoDbHelper {
     public List<TimeSlot> findTimeSlotByDateTimeAndPostCode(String dateTime, String postcode) {
         LocalDateTime localDateTime = LocalDateTime.parse(dateTime,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return mongoGeneric.findTimeSlotByTimeAndPostCode(localDateTime, postcode);
+        return findTimeSlotByDateTimeAndPostCode(localDateTime, postcode);
+    }
+
+    public List<TimeSlot> findTimeSlotByDateTimeAndPostCode(LocalDateTime dateTime, String postcode) {
+        return mongoGeneric.findTimeSlotByTimeAndPostCode(dateTime, postcode);
     }
 
     public int countNumberInProgressDeliveryByTimeSlots(String timeSlotId) {
@@ -50,5 +59,15 @@ public class MongoDbHelper {
 
     public int countNumberInProgressDelivery() {
         return mongoGeneric.findDeliveryByStatus(DeliveryStatusEnum.IN_PROGRESS).size();
+    }
+
+    public List<DeliveryDto> findDeliveryByDate(LocalDateTime startDate, LocalDateTime endDate) {
+        List<TimeSlot> timeSlotsByDate = mongoGeneric.findTimeSlotsByDate(startDate, endDate);
+        List<DeliveryDto> deliveryList = new ArrayList<>();
+        for (TimeSlot timeSlot : timeSlotsByDate) {
+            List<DeliveryDto> deliveryByTimeSlot = mongoGeneric.findDeliveryByTimeSlot(timeSlot.getId());
+            deliveryList.addAll(deliveryByTimeSlot);
+        }
+        return deliveryList;
     }
 }
