@@ -10,5 +10,4 @@ I used next address for testing purpose:
 </p>
 Functionality tested with next DateTime:
 <p>2023-09-17 09:30:30</p>
-
-
+In the next version I will think about moving some requests to async. 
