@@ -44,7 +44,10 @@ public class EventListenerBean {
         List<TimeSlot> timeslotList = objectMapper.readValue(timeslots, new TypeReference<>() {
         });
 
-        mongoGeneric.initHolidays(holidayList);
-        mongoGeneric.initTimeSlots(timeslotList);
+        try {
+            mongoGeneric.initHolidays(holidayList);
+            mongoGeneric.initTimeSlots(timeslotList);
+        } catch (Exception ex) {}
+
     }
 }

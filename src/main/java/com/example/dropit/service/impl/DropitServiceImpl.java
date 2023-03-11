@@ -96,6 +96,12 @@ public class DropitServiceImpl implements DropitService {
             throw new BusinessCapacityException(error);
         }
 
+        if (mongoDbHelper.isHoliday(dateTime)) {
+            String error = String.format("%s is holiday, no delivery", dateTime);
+            log.error(error);
+            throw new MongoDbNotFoundException(error);
+        }
+
         List<TimeSlot> availableTimeSlots = availableTimeSlots(dateTime, singleLineAddressDto);
 
         mongoDbHelper.createNewDelivery(userId, availableTimeSlots.get(0).getId());

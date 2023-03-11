@@ -18,6 +18,7 @@ public interface MongoGeneric {
     List<TimeSlot> findTimeSlotByTime(LocalDateTime dateTime);
     List<TimeSlot> findTimeSlotByTimeAndPostCode(LocalDateTime dateTime, String postcode);
     List<TimeSlot> findTimeSlotsByDate(LocalDateTime startDate, LocalDateTime endDate);
+    List<Holiday> findHolidayByDate(LocalDateTime dateTime);
     List<DeliveryDto> findDeliveryByTimeSlotAndStatus(String timeSlotId, DeliveryStatusEnum deliveryStatusEnum);
     List<DeliveryDto> findDeliveryByStatus(DeliveryStatusEnum deliveryStatusEnum);
     List<DeliveryDto> findDeliveryByTimeSlot(String timeSlotId);

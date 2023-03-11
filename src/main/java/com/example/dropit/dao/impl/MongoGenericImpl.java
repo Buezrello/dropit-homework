@@ -96,6 +96,16 @@ public class MongoGenericImpl implements MongoGeneric {
     }
 
     @Override
+    public List<Holiday> findHolidayByDate(LocalDateTime dateTime) {
+        log.info("Find Holiday by date {}", dateTime);
+        List<Holiday> result = holidayRepository.findByDate(dateTime.toLocalDate());
+        if (result.isEmpty()) {
+            log.info("No holidays today {}", dateTime);
+        }
+        return result;
+    }
+
+    @Override
     public List<DeliveryDto> findDeliveryByTimeSlotAndStatus(String timeSlotId, DeliveryStatusEnum deliveryStatusEnum) {
         log.info("Find delivery by time slot ID {} and status {}", timeSlotId, deliveryStatusEnum);
         List<DeliveryDto> result = deliveryRepository.findByTimeSlotIdAndDeliveryStatusEnum(timeSlotId, deliveryStatusEnum);

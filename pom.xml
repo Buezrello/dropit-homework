@@ -90,6 +90,22 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<parallel>all</parallel>
+					<threadCount>4</threadCount>
+					<threadCountSuites>4</threadCountSuites>
+					<threadCountClasses>4</threadCountClasses>
+					<threadCountMethods>4</threadCountMethods>
+					<perCoreThreadCount>true</perCoreThreadCount>
+<!--					<forkCount>0</forkCount>-->
+					<includes>
+						<include>**</include>
+					</includes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -70,4 +70,8 @@ public class MongoDbHelper {
         }
         return deliveryList;
     }
+
+    public boolean isHoliday(LocalDateTime dateTime) {
+        return !mongoGeneric.findHolidayByDate(dateTime).isEmpty();
+    }
 }
